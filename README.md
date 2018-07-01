@@ -38,7 +38,7 @@ Note that the following guide is for advanced users and a bit more complicated t
 
     The folder `h-encore/PCSG90096` should then contain `sce_sys` and all 4 folders from above, and within these folders you should find files called `X.psvimg` and `X.psvmd`, where `X` has the same name as the folder. Backup this folder, since if everything has been done correctly, you don't need to redo all the steps to install it onto another device with the same PSN account.
 10. Copy the folder `h-encore/PCSG90096` to `PS Vita/APP/xxxxxxxxxxxxxxxx/PCSG90096` and refresh the database under qcma settings.
-11. The *h-encore* bubble with a size of around `243 MB` should now appear in the Content Manager and that's what you finally need to transfer to your PS Vita. If the size does not match or you get the error `C2-12858-4`, then it's because you did not do it correctly! Please re-read the instructions more carefully then.
+11. The *h-encore* bubble with a size of around `243 MB` should now appear in the Content Manager and that's what you finally need to transfer to your PS Vita. If the size does not match or you get the error `C2-12858-4`, then it's because you did not do it correctly! Please re-read the instructions more carefully then. If you get the error `You can only copy applications that your account is the owner of`, then it's because you have used an AID that is not of your account, go back to step 8.
 12. Launch *h-encore* to exploit your device (if a message about trophies appears, simply click yes).
     The screen should first flash white, then purple, and finally open a menu called *h-encore bootstrap menu* where you can download [VitaShell](https://github.com/TheOfficialFloW/VitaShell) and install [HENkaku](https://github.com/henkaku).
     If it prompts the error `Cannot start this application. C0-11136-2`, then it's because you did not do step 6. correctly.
@@ -98,7 +98,7 @@ If you like my work and want to support future projects, you can make a donation
 - via bitcoin `361jRJtjppd2iyaAhBGjf9GUCWnunxtZ49`
 - via [paypal](https://www.paypal.me/flowsupport/20)
 
-You certainly don't have to donate to me, but if you do via paypal, please consider doing it next week or even next month, since a (small) transactions flood will be quickly noticed, especially if they include some messages, you know which 😉, and my account will be blocked as a result. I really don't want to sound greedy or rude, I highly appreciate your kindness, but because of the same reason, small donations (<5$) are not desirable. Oh and if you're blogging about this release, also don't include the paypal link in your post, but simply link this github repository.
+You certainly don't have to donate to me, but if you do via paypal, please consider doing it in a few days, since a (small) transactions flood will be quickly noticed, especially if they include some messages, you know which 😉, and my account will be blocked as a result. I really don't want to sound greedy or rude, I highly appreciate your kindness, but because of the same reason, small donations (<5$) are not desirable. Oh and if you're blogging about this release, also don't include the paypal link in your post, but simply link this github repository.
 
 Thank you!
 

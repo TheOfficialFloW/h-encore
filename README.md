@@ -48,7 +48,7 @@ Note that the following guide is for advanced users and a bit more complicated t
 Since the savedata that I provided is not linked to your account id, launching *h-encore* would eventually show a warning message about trophies. To get rid of that you must do this on your PS Vita:
 
 1. Enable `Unsafe Homebrews` under `HENkaku Settings` in the Settings application to grant VitaShell full permission.
-2. Launch VitaShell and navigate to `ux0:user/savedata/00`.
+2. Launch VitaShell and navigate to `ux0:user/00/savedata/`.
 3. Press triangle on the folder `PCSG90096` and select `Open decrypted`.
 4. Copy `system.dat` out of the folder and remove the folder `ux0:user/savedata/00/PCSG90096`.
 5. Close VitaShell and launch *h-encore* (this will now not trigger the exploit anymore, since we've removed the savedata).

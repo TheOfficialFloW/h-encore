@@ -41,6 +41,7 @@ Note that the following guide is for advanced users and a bit more complicated t
 11. The *h-encore* bubble with a size of around `243 MB` should now appear in the Content Manager and that's what you finally need to transfer to your PS Vita. If the size does not match or you get the error `C2-12858-4`, then it's because you did not do it correctly! Please re-read the instructions more carefully then.
 12. Launch *h-encore* to exploit your device (if a message about trophies appears, simply click yes).
     The screen should first flash white, then purple, and finally open a menu called *h-encore bootstrap menu* where you can download [VitaShell](https://github.com/TheOfficialFloW/VitaShell) and install [HENkaku](https://github.com/henkaku).
+    If it prompts the error `Cannot start this application. C0-11136-2`, then it's because you did not do step 6. correctly.
 13. Enjoy. Note that you have to relaunch the exploit everytime you reboot or shutdown your device. Of course if you only put your device into standby mode, you don't need to relaunch.
 
 ## Getting rid of the trophy warning

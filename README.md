@@ -28,15 +28,13 @@ Note that the following guide is for advanced users and a bit more complicated t
 7. Start qcma and within the qcma settings set the option `Use this version for updates` to `FW 0.00 (Always up-to-date)`.
 8. Launch Content Manager on your PS Vita and connect it to your computer, where you then need to select `PC -> PS Vita System`, and after that you select `Applications`. If you see an error message about System Software, you should simply reboot your device to solve it.
    This should create a folder at `PS Vita/APP/xxxxxxxxxxxxxxxx` on your computer (see qcma settings where this folder is), where the folder `xxxxxxxxxxxxxxxx` represents the AID (account ID) that you need to insert [here](http://cma.henkaku.xyz/). If the AID is valid, it will yield a key that you can now use to encrypt the demo.
-9. Change directory to the `h-encore` folder in terminal and use the key to encrypt all folders that are listed below using:
+9. Change directory to the `h-encore` folder in terminal and use the key to encrypt all folders using:
    ```
-   psvimg-create -n X -K YOUR_KEY X PCSG90096/X
+   psvimg-create -n app -K YOUR_KEY app PCSG90096/app
+   psvimg-create -n appmeta -K YOUR_KEY appmeta PCSG90096/appmeta
+   psvimg-create -n license -K YOUR_KEY license PCSG90096/license
+   psvimg-create -n savedata -K YOUR_KEY savedata PCSG90096/savedata
    ```
-   Where `X` is (yes, repeat it 4 times or write a script for that):
-    - `app`
-    - `appmeta`
-    - `license`
-    - `savedata`
 
     The folder `h-encore/PCSG90096` should then contain `sce_sys` and all 4 folders from above, and within these folders you should find files called `X.psvimg` and `X.psvmd`, where `X` has the same name as the folder. Backup this folder, since if everything has been done correctly, you don't need to redo all the steps to install it onto another device with the same PSN account.
 10. Copy the folder `h-encore/PCSG90096` to `PS Vita/APP/xxxxxxxxxxxxxxxx/PCSG90096` and refresh the database under qcma settings.

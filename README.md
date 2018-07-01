@@ -88,6 +88,7 @@ Since the savedata that I provided is not linked to your account id, launching *
 
 - "Can I switch the PSN account after having *h-encore* installed?" - Yes, since the demo is DRM-free it does not depend on your account.
 - "Are there any risks involved in using *h-encore*?" - No, since it does not modify the OS, but only insert temporary patches into the system.
+- "How can I install it without USB connection?" - You can also connect your PS Vita with your computer using Wi-Fi (there's an option in the Content Manager).
 
 ## Donation
 

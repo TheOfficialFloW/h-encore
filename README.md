@@ -84,6 +84,11 @@ Since the savedata that I provided is not linked to your account id, launching *
 - "Can I use psvsd using this hack?" - It should, but I'm not sure, as I haven't tested it. If it doesn't, then the driver must be updated, but that's not my task.
 - "Does this work, does that work? Is this compatible, is that compatible?" - I don't know, and it is not my task to update these tools for you, so don't dare and file an issue here.
 
+### General
+
+- "Can I switch the PSN account after having *h-encore* installed?" - Yes, since the demo is DRM-free it does not depend on your account.
+- "Are there any risks involved in using *h-encore*?" - No, since it does not modify the OS, but only insert temporary patches into the system.
+
 ## Donation
 
 If you like my work and want to support future projects, you can make a donation:

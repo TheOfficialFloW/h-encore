@@ -13,10 +13,10 @@
 
 Note that the following guide is for advanced users and a bit more complicated than the previous hack that only required you to visit a website. If you don't understand the guide below or how to use these tools, you should neither file an issue here nor annoy me on twitter, but rather seek help on [/r/vitahacks](https://www.reddit.com/r/vitahacks/) (check for duplicated questions first!) or wait for an easy installer by somebody else.
 
-1. Download and install [qcma](https://codestation.github.io/qcma/), [psvimgtools](https://github.com/yifanlu/psvimgtools) and [pkg2zip](https://github.com/mmozeiko/pkg2zip) (check the releases section).
+1. Download and install [qcma](https://codestation.github.io/qcma/), [psvimgtools](https://github.com/yifanlu/psvimgtools) and [pkg2zip](https://github.com/mmozeiko/pkg2zip) (check the releases section for the binaries).
 2. Download the vulnerable DRM-free demo of [bitter smile](http://ares.dl.playstation.net/cdn/JP0741/PCSG90096_00/xGMrXOkORxWRyqzLMihZPqsXAbAXLzvAdJFqtPJLAZTgOcqJobxQAhLNbgiFydVlcmVOrpZKklOYxizQCRpiLfjeROuWivGXfwgkq.pkg) (yes, that's the user entry point).
 3. Download [h-encore](https://github.com/TheOfficialFloW/h-encore/releases/download/v1.0/h-encore.zip) and extract it on your computer.
-4. Extract the demo using:
+4. Extract the demo using this command in terminal:
    ```
    pkg2zip -x PATH_OF_PKG
    ```
@@ -27,8 +27,8 @@ Note that the following guide is for advanced users and a bit more complicated t
    `h-encore/license/ux0_temp_game_PCSG90096_license_app_PCSG90096` and rename the just pasted file `temp.bin` to ` 6488b73b912a753a492e2714e9b38bc7.rif`. Again, this file should be in the same folder as `VITA_PATH.TXT`.
 7. Start qcma and within the qcma settings set the option `Use this version for updates` to `FW 0.00 (Always up-to-date)`.
 8. Launch Content Manager on your PS Vita and connect it to your computer, where you then need to select `PC -> PS Vita System`, and after that you select `Applications`. If you see an error message about System Software, you should simply reboot your device to solve it.
-   This should create a folder at `PS Vita/APP/xxxxxxxxxxxxxxxx` on your computer (see qcma settings where this folder is), where the folder `xxxxxxxxxxxxxxxx` represents the AID (account ID) that you need to insert [here](http://cma.henkaku.xyz/). If the AID is valid, it will yield a key that you can now use to encrypt the demo.
-9. Change directory to the `h-encore` folder in terminal and use the key to encrypt all folders using:
+   This should create a folder at `PS Vita/APP/xxxxxxxxxxxxxxxx` on your computer (see qcma settings where this folder is), where the folder `xxxxxxxxxxxxxxxx` represents the AID (account ID and 16 characters long) that you need to insert [here](http://cma.henkaku.xyz/). If the AID is valid, it will yield a key that you can now use to encrypt the demo.
+9. Change directory to the `h-encore` folder in terminal and use the key to encrypt all folders using (make sure you don't confuse the key with the AID, the key is 64 characters long!):
    ```
    psvimg-create -n app -K YOUR_KEY app PCSG90096/app
    psvimg-create -n appmeta -K YOUR_KEY appmeta PCSG90096/appmeta

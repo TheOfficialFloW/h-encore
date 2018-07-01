@@ -27,7 +27,7 @@ Note that the following guide is for advanced users and a bit more complicated t
    `h-encore/license/ux0_temp_game_PCSG90096_license_app_PCSG90096` and rename the just pasted file `temp.bin` to ` 6488b73b912a753a492e2714e9b38bc7.rif`. Again, this file should be in the same folder as `VITA_PATH.TXT`.
 7. Start qcma and within the qcma settings set the option `Use this version for updates` to `FW 0.00 (Always up-to-date)`.
 8. Launch Content Manager on your PS Vita and connect it to your computer, where you then need to select `PC -> PS Vita System`, and after that you select `Applications`. If you see an error message about System Software, you should simply reboot your device to solve it.
-   This should create a folder at `PS Vita/APP/xxxxxxxxxxxxxxxx` on your computer (see qcma settings where this folder is), where the folder `xxxxxxxxxxxxxxxx` represents the AID (account ID and 16 characters long) that you need to insert [here](http://cma.henkaku.xyz/). If the AID is valid, it will yield a key that you can now use to encrypt the demo.
+   This should create a folder at `PS Vita/APP/xxxxxxxxxxxxxxxx` on your computer (see qcma settings where this folder is), where the folder `xxxxxxxxxxxxxxxx` represents the AID (account ID that is 16 characters long) that you need to insert [here](http://cma.henkaku.xyz/). If the AID is valid, it will yield a key that you can now use to encrypt the demo.
 9. Change directory to the `h-encore` folder in terminal and use the key to encrypt all folders using (make sure you don't confuse the key with the AID, the key is 64 characters long!):
    ```
    psvimg-create -n app -K YOUR_KEY app PCSG90096/app
@@ -38,7 +38,7 @@ Note that the following guide is for advanced users and a bit more complicated t
 
     The folder `h-encore/PCSG90096` should then contain `sce_sys` and all 4 folders from above, and within these folders you should find files called `X.psvimg` and `X.psvmd`, where `X` has the same name as the folder. Backup this folder, since if everything has been done correctly, you don't need to redo all the steps to install it onto another device with the same PSN account.
 10. Copy the folder `h-encore/PCSG90096` to `PS Vita/APP/xxxxxxxxxxxxxxxx/PCSG90096` and refresh the database under qcma settings.
-11. The *h-encore* bubble with a size of around `243 MB` should now appear in the Content Manager and that's what you finally need to transfer to your PS Vita.
+11. The *h-encore* bubble with a size of around `243 MB` should now appear in the Content Manager and that's what you finally need to transfer to your PS Vita. If the size does not match or you get the error `C2-12858-4`, then it's because you did not do it correctly! Please re-read the instructions more carefully then.
 12. Launch *h-encore* to exploit your device (if a message about trophies appears, simply click yes).
     The screen should first flash white, then purple, and finally open a menu called *h-encore bootstrap menu* where you can download [VitaShell](https://github.com/TheOfficialFloW/VitaShell) and install [HENkaku](https://github.com/henkaku).
 13. Enjoy. Note that you have to relaunch the exploit everytime you reboot or shutdown your device. Of course if you only put your device into standby mode, you don't need to relaunch.

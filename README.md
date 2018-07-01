@@ -11,7 +11,7 @@
 
 ## Installation
 
-Note that the following guide is for advanced users and a bit more complicated than the previous hack that only required you to visit a website. If you don't understand the guide below or how to use these tools, you should neither file an issue here nor annoy me on twitter, but rather seek help on [/r/vitahacks](https://www.reddit.com/r/vitahacks/) (check for duplicated questions first!) or wait for an easy installer.
+Note that the following guide is for advanced users and a bit more complicated than the previous hack that only required you to visit a website. If you don't understand the guide below or how to use these tools, you should neither file an issue here nor annoy me on twitter, but rather seek help on [/r/vitahacks](https://www.reddit.com/r/vitahacks/) (check for duplicated questions first!) or wait for an easy installer by somebody else.
 
 1. Download and install [qcma](https://codestation.github.io/qcma/), [psvimgtools](https://github.com/yifanlu/psvimgtools) and [pkg2zip](https://github.com/mmozeiko/pkg2zip) (check the releases section).
 2. Download the vulnerable DRM-free demo of [bitter smile](http://ares.dl.playstation.net/cdn/JP0741/PCSG90096_00/xGMrXOkORxWRyqzLMihZPqsXAbAXLzvAdJFqtPJLAZTgOcqJobxQAhLNbgiFydVlcmVOrpZKklOYxizQCRpiLfjeROuWivGXfwgkq.pkg) (yes, that's the user entry point).
@@ -88,7 +88,7 @@ Since the savedata that I provided is not linked to your account id, launching *
 
 - "Can I switch the PSN account after having *h-encore* installed?" - Yes, since the demo is DRM-free it does not depend on your account.
 - "Are there any risks involved in using *h-encore*?" - No, since it does not modify the OS, but only insert temporary patches into the system.
-- "How can I install it without USB connection?" - You can also connect your PS Vita with your computer using Wi-Fi (there's an option in the Content Manager).
+- "Can I install it without USB connection?" - You can also connect your PS Vita with your computer using Wi-Fi (there's an option in the Content Manager).
 
 ## Donation
 

@@ -24,9 +24,9 @@ Note that the following guide is for advanced users and a bit more complicated t
    This will output the files to `app/PCSG90096`.
 5. Copy the contents of the output `app/PCSG90096` to the folder `h-encore/app/ux0_temp_game_PCSG90096_app_PCSG90096` (such that the files `eboot.bin` and `VITA_PATH.TXT` are within the same folder).
 6. Copy the license file `app/PCSG90096/sce_sys/package/temp.bin` to the folder  
-   `h-encore/license/ux0_temp_game_PCSG90096_license_app_PCSG90096` and rename the just pasted file `temp.bin` to ` 6488b73b912a753a492e2714e9b38bc7.rif`. Again, this file should be in the same folder as `VITA_PATH.TXT`.
-7. Start qcma and within the qcma settings set the option `Use this version for updates` to `FW 0.00 (Always up-to-date)`.
-8. Launch Content Manager on your PS Vita and connect it to your computer, where you then need to select `PC -> PS Vita System`, and after that you select `Applications`. If you see an error message about System Software, you should simply reboot your device to solve it.
+   `h-encore/license/ux0_temp_game_PCSG90096_license_app_PCSG90096` and rename the just pasted file `temp.bin` to ` 6488b73b912a753a492e2714e9b38bc7.rif`. Be careful with the file extension, it should not be `.rif.bin`. Again, this file should be in the same folder as `VITA_PATH.TXT`.
+7. Start qcma and within the qcma settings set the option `Use this version for updates` to `FW 0.00 (Always up-to-date)` to spoof the System Software check.
+8. Launch Content Manager on your PS Vita and connect it to your computer, where you then need to select `PC -> PS Vita System`, and after that you select `Applications`. If you see an error message about System Software, you should simply reboot your device to solve it (if this doesn't solve, then put your device into airplane mode and reboot).
    This should create a folder at `PS Vita/APP/xxxxxxxxxxxxxxxx` on your computer (see qcma settings where this folder is), where the folder `xxxxxxxxxxxxxxxx` represents the AID (account ID that is 16 characters long) that you need to insert [here](http://cma.henkaku.xyz/). If the AID is valid, it will yield a key that you can now use to encrypt the demo.
 9. Change directory to the `h-encore` folder in terminal and use the key to encrypt all folders using (make sure you don't confuse the key with the AID, the key is 64 characters long!):
    ```
@@ -82,7 +82,7 @@ Since the savedata that I provided is not linked to your account id, launching *
 
 - "Are Adrenaline/NoNpDrm/Download Enabler supported on 3.65/3.67/3.68?" - Yes, check them in my repositories.
 - "Can I use SD2VITA using this hack?" - Yes, I have made a pull request on [gamecard-microsd](https://github.com/xyzz/gamecard-microsd) that fixed the freeze when using it without enso. If you're using an other plugin and it freezes on exitting *h-encore bootstrap menu*, then there's the trick where you can simply press the PS Button and return back to finish the boot process.
-- "Can I use psvsd using this hack?" - It should, but I'm not sure, as I haven't tested it. If it doesn't, then the driver must be updated, but that's not my task.
+- "Can I use psvsd using this hack?" - Yes, people confirmed that it is working finely.
 - "Does this work, does that work? Is this compatible, is that compatible?" - I don't know, and it is not my task to update these tools for you, so don't dare and file an issue here.
 
 ### General

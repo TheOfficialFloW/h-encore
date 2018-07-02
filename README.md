@@ -50,12 +50,12 @@ Since the savedata that I provided is not linked to your account id, launching *
 
 1. Enable `Unsafe Homebrews` under `HENkaku Settings` in the Settings application to grant VitaShell full permission.
 2. Launch VitaShell and navigate to `ux0:user/00/savedata/`.
-3. Press triangle on the folder `PCSG90096` and select `Open decrypted`.
+3. Press triangle on the folder `PCSG90096` and select `Open decrypted` (you should NOT see the folder `sce_pfs` within this folder when opened decrypted).
 4. Copy `system.dat` out of the folder and remove the folder `ux0:user/00/savedata/PCSG90096`.
 5. Close VitaShell and launch *h-encore* (this will now not trigger the exploit anymore, since we've removed the savedata).
 6. Close the game after you see the first screen and return back to VitaShell.
 7. A fresh folder of `PCSG90096` at `ux0:user/00/savedata` should have been created.
-8. Copy `system.dat` back to `ux0:user/00/savedata/PCSG90096/system.dat` where you need to open the `PCSG90096` using `Open decrypted`.
+8. Copy `system.dat` back to `ux0:user/00/savedata/PCSG90096/system.dat` where you need to open the `PCSG90096` using `Open decrypted` (you should NOT see the folder `sce_pfs` within this folder when opened decrypted).
 9. Now if you launch *h-encore* you should not see the trophy warning anymore and exploiting your device is therefore even faster.
 
 ## FAQ

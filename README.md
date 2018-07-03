@@ -99,8 +99,6 @@ If you like my work and want to support future projects, you can make a donation
 - via bitcoin `361jRJtjppd2iyaAhBGjf9GUCWnunxtZ49`
 - via [paypal](https://www.paypal.me/flowsupport/20)
 
-You certainly don't have to donate to me, but if you do via paypal, please consider doing it in a few days, since a (small) transactions flood will be quickly noticed, especially if they include some messages, you know which 😉, and my account will be blocked as a result. I really don't want to sound greedy or rude, I highly appreciate your kindness, but because of the same reason, small donations (<5$) are not desirable. Oh and if you're blogging about this release, also don't include the paypal link in your post, but simply link this github repository.
-
 Thank you!
 
 ## Source code

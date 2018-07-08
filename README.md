@@ -98,6 +98,7 @@ If you like my work and want to support future projects, you can make a donation
 
 - via bitcoin `361jRJtjppd2iyaAhBGjf9GUCWnunxtZ49`
 - via [paypal](https://www.paypal.me/flowsupport/20)
+- on [patreon](https://www.patreon.com/TheOfficialFloW)
 
 Thank you!
 

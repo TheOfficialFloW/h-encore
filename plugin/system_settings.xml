@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<system_settings version="1.0" plugin="system_settings_plugin">
+
+  <!-- システム設定 トップメニュー -->
+  <setting_list id="system_settings" 
+                title="msg_settings">
+
+    <!-- Sandbox Settings -->
+    <link id="sandbox_settings"
+          file="sandbox_settings.xml"
+          title="Sandbox Settings"
+          icon="tex_spanner"/>
+
+    <!-- フレームワークテスト -->
+    <link id="framework_test"
+      file="framework_test.xml"
+      title="フレームワークテスト"
+      icon="tex_spanner"/>
+
+    <!-- テスト用と本番用でなんとなく分ける -->
+    <spacer id="spacer0" />
+
+    <!-- 機内モード -->
+    <toggle_switch id="flight_mode"
+                   key="/CONFIG/SYSTEM/flight_mode"
+                   title="msg_airplanemode"
+                   icon="tex_flight_mode"
+                   hint="msg_airplanemode_info" />
+
+    <!-- HENkaku Settings -->
+    <link id="henkaku_settings"
+            title="msg_henkaku_settings"
+            icon="tex_spanner"
+            file="idu_settings.xml"
+            />
+    
+    <!-- ネットワーク設定 -->
+    <link id="network_settings"
+          title="msg_network"
+          icon="tex_network"
+          file="network_settings.xml" />
+
+    <!-- PlayStation®Network設定 -->
+    <link id="psn_settings"
+          file="psn_settings.xml"
+          title="msg_psn"
+          icon="tex_psn"/>
+
+    <!-- 周辺機器設定 -->
+    <link id="peripherals_settings"
+          file="peripherals_settings.xml"
+          title="msg_accessories"
+          icon="tex_accessories"/>
+
+    <!-- お知らせ -->
+    <link id="notification_settings"
+          file="notification_settings.xml"
+          title="msg_notifications"
+          icon="tex_notification"/>
+
+    <!-- サウンド＆ディスプレイ -->
+    <link id="sound_settings"
+          file="sound_settings.xml"
+          title="msg_sound_display"
+          icon="tex_sound_display"/>
+
+    <!-- テーマ -->
+    <link id="theme_settings"
+          file="theme_settings.xml"
+          title="msg_theme_background"
+          icon="tex_themes"/>
+
+    <!-- 位置データ -->
+    <link id="location_settings"
+          file="location_settings.xml"
+          title="msg_location_data"
+          icon="tex_location_information_service"/>
+
+    <!-- セキュリティー -->
+    <link id="security_settings"
+          file="security_settings.xml"
+          title="msg_pc_security"
+          icon="tex_security"/>
+
+    <!-- 日付＆時刻 -->
+    <link id="datetime_settings"
+          file="datetime_settings.xml"
+          title="msg_date_time"
+          icon="tex_time_date"/>
+
+    <!-- 言語 -->
+    <link id="language_settings"
+          file="language_settings.xml"
+          title="msg_language"
+          icon="tex_language"/>
+
+    <!-- アクセシビリティ -->
+    <link id="accessibility"
+          file="accessibility.xml"
+          title="msg_accessibility"
+          icon="tex_accessibility"/>
+
+    <!-- システム -->
+    <link id="console_info"
+          file="console_info.xml"
+          title="msg_system"
+          icon="tex_system"/>
+
+    <!-- 初期化 -->
+    <link id="reset"
+          file="reset.xml"
+          title="msg_format_restore"
+          icon="tex_format"/>
+
+    <!-- 省電力設定 -->
+    <link id="powersave_settings"
+          file="powersave_settings.xml"
+          title="msg_power_saving_settings"
+          icon="tex_power_save"/>
+
+    <!-- IDU Settings -->
+    <link id="idu_settings"
+          file="idu_settings.xml"
+          title="IDU Settings"
+          icon="tex_spanner"/>
+
+    <!-- ★Debug Settings -->
+    <link id="debug_settings"
+          file="debug_settings.xml"
+          title="★Debug Settings"
+          icon="tex_spanner"/>
+
+  </setting_list>
+
+</system_settings>

@@ -2,6 +2,10 @@
 
 *h-encore*, where *h* stands for hacks and homebrews, is the second public jailbreak for the *PS Vita™* which supports the newest firmwares 3.65, 3.67 and 3.68. It allows you to make kernel- and user-modifications, change the clock speed, install plugins, run homebrews and much more.
 
+## Write-up
+
+A technical explanation of the *h-encore* exploit chain is available [here](WRITE-UP.md).
+
 ## Requirements
 
 - Your device must be on firmware 3.65, 3.67 or 3.68. Any other is not supported. If you're on a lower firmware, please decide carefully to what firmware you want to update, then search for a trustable guide on [/r/vitahacks](https://www.reddit.com/r/vitahacks/) (if you know how and want to contribute, you can edit this readme and make a pull request, such that fellow readers have got an easier life).
@@ -101,10 +105,6 @@ If you like my work and want to support future projects, you can make a donation
 - on [patreon](https://www.patreon.com/TheOfficialFloW)
 
 Thank you!
-
-## Source code
-
-The source code and the kernel exploit will be made public after Sony has fixed the bugs used in *h-encore*.
 
 ## Credits
 

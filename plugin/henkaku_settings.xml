@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<system_settings version="1.0" plugin="idu_settings_plugin">
+
+  <setting_list id="henkaku_settings" title="msg_henkaku_settings" icon="tex_spanner">
+
+    <!-- Enable PSN Spoofing -->
+    <toggle_switch id="id_enable_psn_spoofing"
+                   title="msg_enable_psn_spoofing"
+                   icon="tex_spanner"
+                   key="/CONFIG/HENKAKU/enable_psn_spoofing"/>
+
+    <!-- Enable Unsafe Homebrew -->
+    <toggle_switch id="id_enable_unsafe_homebrew"
+                   title="msg_enable_unsafe_homebrew"
+                   hint="msg_unsafe_homebrew_description"
+                   icon="tex_spanner"
+                   key="/CONFIG/HENKAKU/enable_unsafe_homebrew"/>
+
+    <!-- Enable PSN Spoofing -->
+    <toggle_switch id="id_enable_version_spoofing"
+                   title="msg_enable_version_spoofing"
+                   icon="tex_spanner"
+                   key="/CONFIG/HENKAKU/enable_version_spoofing"/>
+
+    <!-- Spoofed version -->
+    <text_field id="id_spoofed_version"
+                title="msg_spoofed_version"
+                icon="tex_spanner"
+                key="/CONFIG/HENKAKU/spoofed_version"
+                keyboard_type="extended_numeral"
+                max_length="5"/>
+
+    <!-- ○ Button Behavior -->
+    <list id="id_button_behavior"
+          title="msg_button_behavior"
+          icon="tex_spanner"
+          key="/CONFIG/SYSTEM/button_assign">
+      <list_item id="id_button_behavior_enter"
+                 title="msg_button_enter"
+                 value="0"/>
+      <list_item id="id_button_behavior_cancel"
+                 title="msg_button_cancel"
+                 value="1"/>
+    </list>
+
+    <!-- Content Downloader -->
+    <setting_list id="download"
+                  title="msg_content_downloader"
+                  icon="tex_spanner"
+                  navi_left="download_footer_cancel"
+                  navi_center="download_footer_select_all"
+                  navi_right="download_footer_exec">
+      <user_custom id="download_dummy"/>
+    </setting_list>
+
+    <!-- Unlink Memory Card -->
+    <button id="id_unlink_memory_card"
+            title="msg_unlink_memory_card"
+            icon="tex_spanner"
+            success_dialog_message="msg_unlink_memory_card_success"
+            error_dialog_message="msg_unlink_memory_card_error"/>
+
+    <!-- Reload taiHEN config.txt -->
+    <button id="id_reload_taihen_config"
+            title="msg_reload_taihen_config"
+            icon="tex_spanner"
+            success_dialog_message="msg_reload_taihen_config_success"/>
+
+    <!-- Reboot device -->
+    <button id="id_reboot_device"
+            title="msg_reboot_device"
+            icon="tex_spanner"/>
+
+  </setting_list>
+</system_settings>

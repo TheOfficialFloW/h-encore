@@ -1,0 +1,57 @@
+{
+  "taihen": {
+    "nid": 910080232,
+    "modules": {
+      "taihen": {
+        "nid": 540875304,
+        "kernel": false,
+        "functions": {
+          "taiHookFunctionExportForUser": 2269553102,
+          "taiHookFunctionImportForUser": 1399025245,
+          "taiHookFunctionOffsetForUser": 87368282,
+          "taiGetModuleInfo": 2777256836,
+          "taiHookRelease": 472967065,
+          "taiInjectAbs": 1247316228,
+          "taiInjectDataForUser": 3458578876,
+          "taiInjectRelease": 564447398
+        },
+        "variables": {
+        }
+      }, 
+      "taihenForKernel": {
+        "nid": 3487819968,
+        "kernel": true,
+        "functions": {
+          "taiHookFunctionAbs": 3605329551,
+          "taiHookFunctionExportForKernel": 1171062720,
+          "taiHookFunctionImportForKernel": 1159321730,
+          "taiHookFunctionOffsetForKernel": 2402393463,
+          "taiGetModuleInfoForKernel": 1855132055,
+          "taiHookReleaseForKernel": 3525736650,
+          "taiInjectAbsForKernel": 4230976111,
+          "taiInjectDataForKernel": 2678390840,
+          "taiInjectReleaseForKernel": 1371225801,
+          "taiLoadPluginsForTitleForKernel": 2621581546
+        },
+        "variables": {
+        }
+      }, 
+      "taihenUnsafe": {
+        "nid": 2998301478,
+        "kernel": false,
+        "functions": {
+          "taiLoadKernelModule": 3603990244,
+          "taiStartKernelModuleForUser": 2850755214,
+          "taiLoadStartKernelModuleForUser": 2559617235,
+          "taiLoadStartModuleForPidForUser": 3897797579,
+          "taiStopUnloadKernelModuleForUser": 1277030648,
+          "taiUnloadKernelModule": 1275696130,
+          "taiMemcpyUserToKernel": 4138861294,
+          "taiMemcpyKernelToUser": 2310758437
+        },
+        "variables": {
+        }
+      }
+    }
+  }
+}

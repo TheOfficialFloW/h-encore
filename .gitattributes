@@ -1,0 +1,4 @@
+*.c linguist-language=C
+*.C linguist-language=C
+*.s linguist-language=C
+*.S linguist-language=C

@@ -1,0 +1,3 @@
+[submodule "taiHEN"]
+	path = taiHEN
+	url = git://github.com/TheOfficialFloW/taiHEN.git

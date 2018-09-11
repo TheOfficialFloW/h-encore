@@ -21,7 +21,7 @@ Looking for gamesave exploits is a boring process, you just fuzz gamesaves by wr
 #### Buffer overflow
 
 The bug relies on the parser of the bittersmile game. The gamesave is actually a text file and the game reads it line by line and copies them to a list of buffers. However it doesn't validate the length, thus if we put the delimiter `\n` far away such that the line is longer than the buffer can hold, we get a classic buffer overflow.  
-If this buffer is on stack, we can make it overwrite the return address and straightly execute our ROP chain. However it is on the data section, but luckily for us, the content after the buffer is actually the list that contained destinations for other lines. This means that if we overflow into the list and redirect the buffer, we can copy the next line to wherever we want and therefore enable us an arbitrary write primitive (see [generate.py](https://github.com/TheOfficialFloW/h-encore/blob/master/scripts/generate.py)).
+If this buffer is on stack, we can make it overwrite the return address and straightly execute our ROP chain. However it is on the data section, but luckily for us, the content after the buffer is actually the list that contains destinations for other lines. This means that if we overflow into the list and redirect the buffer, we can copy the next line to wherever we want and therefore enable us an arbitrary write primitive (see [generate.py](https://github.com/TheOfficialFloW/h-encore/blob/master/scripts/generate.py)).
 
 #### Partial ASLR
 
@@ -254,7 +254,7 @@ do {
 kstack_base -= KSTACK_DEVCTL_INDATA_OFFSET;
 ```
 
-Now if we want to implement this in ROP we can of course not use branch instructions, as they set the program counter, not the stack pointer. What we need is a way to conditional move the stack pointer like this:
+Now if we want to implement this in ROP we can of course not use branch instructions, as they set the program counter, not the stack pointer. What we need is a way to conditionally move the stack pointer like this:
 
 ```c
 if (ret == SCE_NGS_ERROR_INVALID_PARAM)
@@ -263,7 +263,7 @@ else
   sp = loop_end;
 ```
 
-In ARM there exists the `it (if-then)` instruction which allows us to conditional move a register like `it eq ; moveq r0, r1`. Unfortunately there is no such gadget available in our executable.
+In ARM there exists the `it (if-then)` instruction which allows us to conditionally move a register like `it eq ; moveq r0, r1`. Unfortunately there is no such gadget available in our executable.
 However, we have got this gadget here:
 
 ```c
@@ -285,7 +285,7 @@ else
 sp = tmp + loop_end;
 ```
 
-The mentioned properties say that the product of any number times zero is zero and the product of any number times one is itself, therefore if we can set `tmp ` as the product of `cmp_eq(ret, SCE_NGS_ERROR_INVALID_PARAM)` times `loop_start - loop_end`, we get our desired logic:
+The mentioned properties say that the product of any number times zero is zero and the product of any number times one is itself, therefore if we set `tmp ` as the product of `cmp_eq(ret, SCE_NGS_ERROR_INVALID_PARAM)` times `loop_start - loop_end`, we get our desired logic:
 
 ```c
 sp = (cmp_eq(ret, SCE_NGS_ERROR_INVALID_PARAM) * (loop_start - loop_end)) + loop_end;
@@ -341,7 +341,7 @@ This is neccessary because when calling subroutines in ROP, the stack gets corru
 
 We have now only partially defeated kernel ASLR by learning the kernel stack base address. However to build a kernel ROP chain which we will later use, we must know at least a base address of a kernel module. This is because we cannot implicitly execute user executable memory in kernel, thus our ROP chain cannot consist of user gadgets.  
 While reverse engineering the codepath of the rack syscall, I found something bizarre: It is using some fields in the SceNgsBlock header in order to store temporary variables. Some of those are the parameters for a `copyout()`!  
-This means that we can easiely enable an arbitrary kernel read primitive by using our out-of-bounds exploit to overwrite these parameters (see [stage2.S](https://github.com/TheOfficialFloW/h-encore-private/blob/master/stage2/stage2.S)):
+This means that we can easiely enable an arbitrary kernel read primitive by using our out-of-bounds exploit to overwrite these parameters (see [stage2.S](https://github.com/TheOfficialFloW/h-encore/blob/master/stage2/stage2.S)):
 
 ```c
   // Set presets information in voice definition
@@ -415,7 +415,7 @@ As the return address that we have overwritten is very near the stack bottom (be
 
 Note that `push` is a macro that takes a base as first argument which says what type the next argument has, where `0: constant`, `1: SceSysmem gadget`,  `2: kernel stack (for RW operations)` and `9: dummy (won't be written)`.
 
-The actual kernel ROP chain then allocates two RW memory blocks, copies the compressed kernel payload to first block and stores the decompressed payload in the second block. Finally, it marks the second block as executable, flushes caches and executes it.
+The actual kernel ROP chain then allocates two RW memory blocks, copies the compressed kernel payload to the first block and stores the decompressed payload in the second block. Finally, it marks the second block as executable, flushes caches and executes it.
 
 #### Post-exploitation
 

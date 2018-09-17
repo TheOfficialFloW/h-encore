@@ -151,7 +151,7 @@
   push 0, PAYLOAD_DECOMPRESSED_SIZE                   // r1
   push 1, SceSysmem_mov_r2_r5_blx_r6                  // r2
   push 1, SceSysmem_ksceDeflateDecompress             // r4
-  push 1, SceSysmem_pop_r0_pc                         // R6
+  push 1, SceSysmem_pop_r0_pc                         // r6
   push 1, SceSysmem_movs_r5_r0_blx_r2                 // pc
   push 2, payload_code_block                          // r0
   push 1, SceSysmem_pop_r3_pc                         // pc

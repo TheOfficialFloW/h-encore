@@ -11,7 +11,7 @@ A technical explanation of the *h-encore* exploit chain is available [here](WRIT
 - Your device must be on firmware 3.65, 3.67 or 3.68. **Firmware 3.69 and higher are not supported**. If you're on a lower firmware, please decide carefully to what firmware you want to update, then search for a trustable guide on [/r/vitahacks](https://www.reddit.com/r/vitahacks/) (if you know how and want to contribute, you can edit this readme and make a pull request, such that fellow readers have got an easier life).
   Remember that on firmware 3.65 you have got the possibility to install [enso](https://github.com/TheOfficialFloW/enso/releases), the permanent hack, whereas on 3.67 and 3.68 you don't.
 - If your device is a phat OLED model, you need a Memory Card in order to install. There's no need for a Memory Card on Slim/PS TV models, since they already provide an Internal Storage. Make sure you have got at least `270 MB` of free space.
-- Your device must be linked to any PSN account (it doesn't need to be activated though).
+- Your device must be linked to any PSN account (it doesn't need to be activated though). If it is not, then you must restore default settings in order to sign in.
 
 ## Installation
 

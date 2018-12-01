@@ -10,7 +10,7 @@
 .equ KSTACK_SIZE,                                 0x1000
 .equ KSTACK_DEVCTL_INDATA_OFFSET,                 0x6f8
 .equ KSTACK_SYSMEM_OFFSET,                        0x89c
-.equ SCE_SYSMEM_BASE,                             -0x1697
+.equ SCE_SYSMEM_OFFSET,                           -0x1697
 
 // call
 .equ SceSysmem_blx_r0,                            0x1fb3f

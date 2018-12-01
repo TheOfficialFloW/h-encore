@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Welcome to my write-up of the *h-encore* exploit chain. In this write-up I want to introduce you the security measures of the PS Vita, explain how I found the vulnerabilites, how I exploited them and how I bypassed the measures by using modern techniques.  
+Welcome to my write-up of the *h-encore* exploit chain. In this write-up I want to introduce you the security measures of the PS Vita, explain how I found the vulnerabilities, how I exploited them and how I bypassed the measures by using modern techniques.  
 I hope that it is an interesting read for both beginners and experts, and for both people in the scene and out of the scene.
 
 ## Userland exploit
@@ -230,7 +230,7 @@ int ret = 0;
 uint32_t kstack_base = KSTACK_BASE_START;
 
 do {
-  rack_desc.pVoiceDefn = (struct SceNgsVoiceDefinition *)(kstack_base + DEVCTL_STACK_FRAME) ^ SCE_NGS_VOICE_DEFINITION_XOR;
+  rack_desc.pVoiceDefn = (struct SceNgsVoiceDefinition *)(kstack_base + KSTACK_DEVCTL_INDATA_OFFSET) ^ SCE_NGS_VOICE_DEFINITION_XOR;
   ret = sceNgsRackGetRequiredMemorySize(sys_handle, &rack_desc, &buffer_info.size);
   if (ret == SCE_NGS_ERROR_INVALID_PARAM)
     kstack_base += KSTACK_BASE_STEP;
@@ -239,7 +239,7 @@ do {
 
 #### Implementing a conditional loop in ROP
 
-Writing ROP is is not as simple as writing assembly. One instruction may only be implemented with more than a dozen of gadgets. Therefore we would like to keep our code as simple as possible and eliminate the redunant addition and condition within the loop:
+Writing ROP is is not as simple as writing assembly. One instruction may only be implemented with more than a dozen of gadgets. Therefore we would like to keep our code as simple as possible and eliminate the redundant addition and condition within the loop:
 
 ```c
 int ret = 0;
@@ -335,13 +335,13 @@ Note that we are using the macro `load_call_lvv_2` here instead of `load_call_lv
   .word 0xDEADBEEF                         // dummy
 ```
 
-This is neccessary because when calling subroutines in ROP, the stack gets corrupted due to the subroutine's stack allocations such as for the prologue, where callee saved registers are pushed onto stack (sidemark: if you call a syscall, then the user stack remains untouched). Normally this does not matter, but in a loop we want to reuse the gadgets. In our case the stack is corrupted by `push.w {r4, r5, r6, r7, r8, lr}` in `sceNgsRackGetRequiredMemorySize()`, since it is to be exact only a wrapper that calls the actual syscall `sceNgsRackGetRequiredMemorySizeInternal()`.
+This is necessary because when calling subroutines in ROP, the stack gets corrupted due to the subroutine's stack allocations such as for the prologue, where callee saved registers are pushed onto stack (side mark: if you call a syscall, then the user stack remains untouched). Normally this does not matter, but in a loop we want to reuse the gadgets. In our case the stack is corrupted by `push.w {r4, r5, r6, r7, r8, lr}` in `sceNgsRackGetRequiredMemorySize()`, since it is to be exact only a wrapper that calls the actual syscall `sceNgsRackGetRequiredMemorySizeInternal()`.
 
 #### Defeating kernel ASLR
 
 We have now only partially defeated kernel ASLR by learning the kernel stack base address. However to build a kernel ROP chain which we will later use, we must know at least a base address of a kernel module. This is because we cannot implicitly execute user executable memory in kernel, thus our ROP chain cannot consist of user gadgets.  
 While reverse engineering the codepath of the rack syscall, I found something bizarre: It is using some fields in the SceNgsBlock header in order to store temporary variables. Some of those are the parameters for a `copyout()`!  
-This means that we can easiely enable an arbitrary kernel read primitive by using our out-of-bounds exploit to overwrite these parameters (see [stage2.S](https://github.com/TheOfficialFloW/h-encore/blob/master/stage2/stage2.S)):
+This means that we can easily enable an arbitrary kernel read primitive by using our out-of-bounds exploit to overwrite these parameters (see [stage2.S](https://github.com/TheOfficialFloW/h-encore/blob/master/stage2/stage2.S)):
 
 ```c
   // Set presets information in voice definition
@@ -363,7 +363,7 @@ This means that we can easiely enable an arbitrary kernel read primitive by usin
   trigger_exploit
 
   // Get SceSysmem base address
-  load_add_store sysmem_base, sysmem_base, SCE_SYSMEM_BASE
+  load_add_store sysmem_base, sysmem_base, SCE_SYSMEM_OFFSET
 ```
 
 Note how the first preset is used to move the destination pointer backwards and how the second is used to overwrite the target with controlled data.
@@ -391,7 +391,7 @@ Remember that our out-of-bounds write can manipulate anything that has a lower a
 
 The spawned thread (let's call it thread 2 and the current thread 1) must now simply call any syscall.
 This syscall should not terminate before its stack has been overwritten. To accomplish that we can for example acquire a semaphore in thread 2, overwrite the kernel stack in thread 1, and finally release the semaphore in thread 1 to make the acquire syscall terminate and trigger kernel ROP execution on midway.  
-This is however more effort than actually needed and can be done in a simpler fashion by using the syscall `sceKernelDelayThread()` to make the thread wait a a little bit. I choosed 100ms which is enough time for thread 1 to hijack the kernel stack of thread 2 before it returns back to user.  
+This is however more effort than actually needed and can be done in a simpler fashion by using the syscall `sceKernelDelayThread()` to make the thread wait a a little bit. I chose 100ms which is enough time for thread 1 to hijack the kernel stack of thread 2 before it returns back to user.  
 The reason why it works is because the delay syscall calls some subroutines which make the stack grow (callee saved registers and the return address are pushed onto stack), then after 100ms the stack will shrink back and data will be popped from the stack. If we manage to overwrite the return address between these two phases, we can execute our kernel ROP chain. Note that since the stack grows from high to low and we are attacking from above, we don't need to deal with stack cookies.
 
 #### Kernel ROP execution

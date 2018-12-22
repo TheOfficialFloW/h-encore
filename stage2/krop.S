@@ -181,7 +181,7 @@
   push 1, SceSysmem_ldr_r0_r0_blx_r3                  // pc
   push 9, 0xDEADBEEF                                  // r4
 
-  // Flush caches
+  // Clean cache
   push 1, SceSysmem_pop_r0_r1_r2_r3_r4_pc             // pc
   push 2, payload_code_block                          // r0
   push 0, PAYLOAD_DECOMPRESSED_SIZE                   // r1

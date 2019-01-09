@@ -230,7 +230,7 @@ int ret = 0;
 uint32_t kstack_base = KSTACK_BASE_START;
 
 do {
-  rack_desc.pVoiceDefn = (struct SceNgsVoiceDefinition *)(kstack_base + KSTACK_DEVCTL_INDATA_OFFSET) ^ SCE_NGS_VOICE_DEFINITION_XOR;
+  rack_desc.pVoiceDefn = (struct SceNgsVoiceDefinition *)((kstack_base + KSTACK_DEVCTL_INDATA_OFFSET) ^ SCE_NGS_VOICE_DEFINITION_XOR);
   ret = sceNgsRackGetRequiredMemorySize(sys_handle, &rack_desc, &buffer_info.size);
   if (ret == SCE_NGS_ERROR_INVALID_PARAM)
     kstack_base += KSTACK_BASE_STEP;

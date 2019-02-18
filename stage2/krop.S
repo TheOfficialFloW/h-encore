@@ -147,7 +147,7 @@
   push 1, SceSysmem_pop_r3_pc                         // pc
   push 0, NULL                                        // r3
   push 1, SceSysmem_blx_r4_pop_r4_pc                  // pc
-  push 0, 0xDEADBEEF                                  // r4
+  push 9, 0xDEADBEEF                                  // r4
 
   // Free temporary block
   push 1, SceSysmem_pop_r0_r1_r2_r3_r4_pc             // pc

@@ -18,19 +18,19 @@
 
 // load
 .equ SceSysmem_pop_pc,                            0x347
-.equ SceSysmem_pop_r0_pc,                         0x31
+.equ SceSysmem_pop_r0_r1_pc,                      0x853
 .equ SceSysmem_pop_r0_r1_r2_r3_r4_pc,             0x258bd
 .equ SceSysmem_pop_r1_r2_r4_r6_pc,                0x288ff
 .equ SceSysmem_pop_r3_pc,                         0x1d8f
+.equ SceSysmem_pop_r3_r4_r5_pc,                   0x1377
 .equ SceSysmem_pop_r3_r4_r5_r6_r7_pc,             0xf59
 .equ SceSysmem_ldr_r0_r0_blx_r3,                  0x11337
+.equ SceSysmem_ldr_r2_r5_14_blx_r3,               0x1f697
 
 // store
-.equ SceSysmem_str_r0_r3_movs_r0_0_pop_r4_pc,     0x18e25
+.equ SceSysmem_str_r0_r4_movs_r0_0_pop_r4_pc,     0x4f71
 
 // move
-.equ SceSysmem_mov_r2_r5_blx_r6,                  0x11e07
-.equ SceSysmem_movs_r5_r0_blx_r2,                 0x11129
 .equ SceSysmem_mov_sp_r1_blx_r2,                  0x67
 
 // arithmetic
@@ -88,12 +88,8 @@
   push 0, NULL                                        // r3
   push 1, SceSysmem_ksceKernelAllocMemBlock           // r4
   push 1, SceSysmem_blx_r4_pop_r4_pc                  // pc
-  push 9, 0xDEADBEEF                                  // r4
-
-  // Save temporary blockid
-  push 1, SceSysmem_pop_r3_pc                         // pc
-  push 2, payload_temp_blockid                        // r3
-  push 1, SceSysmem_str_r0_r3_movs_r0_0_pop_r4_pc     // pc
+  push 2, payload_temp_blockid                        // r4
+  push 1, SceSysmem_str_r0_r4_movs_r0_0_pop_r4_pc     // pc
   push 9, 0xDEADBEEF                                  // r4
 
   // Get temporary block
@@ -114,12 +110,8 @@
   push 0, NULL                                        // r3
   push 1, SceSysmem_ksceKernelAllocMemBlock           // r4
   push 1, SceSysmem_blx_r4_pop_r4_pc                  // pc
-  push 9, 0xDEADBEEF                                  // r4
-
-  // Save code blockid
-  push 1, SceSysmem_pop_r3_pc                         // pc
-  push 2, payload_code_blockid                        // r3
-  push 1, SceSysmem_str_r0_r3_movs_r0_0_pop_r4_pc     // pc
+  push 2, payload_code_blockid                        // r4
+  push 1, SceSysmem_str_r0_r4_movs_r0_0_pop_r4_pc     // pc
   push 9, 0xDEADBEEF                                  // r4
 
   // Get code block
@@ -143,23 +135,19 @@
   push 9, 0xDEADBEEF                                  // r4
 
   // Decompress payload to code block
-  push 1, SceSysmem_pop_r0_pc                         // pc
-  push 2, payload_temp_block                          // r0
-  push 1, SceSysmem_pop_r3_pc                         // pc
-  push 1, SceSysmem_pop_r1_r2_r4_r6_pc                // r3
-  push 1, SceSysmem_ldr_r0_r0_blx_r3                  // pc
-  push 0, PAYLOAD_DECOMPRESSED_SIZE                   // r1
-  push 1, SceSysmem_mov_r2_r5_blx_r6                  // r2
+  push 1, SceSysmem_pop_r3_r4_r5_pc                   // pc
+  push 1, SceSysmem_pop_pc                            // r3
   push 1, SceSysmem_ksceDeflateDecompress             // r4
-  push 1, SceSysmem_pop_r0_pc                         // r6
-  push 1, SceSysmem_movs_r5_r0_blx_r2                 // pc
+  push 2, payload_temp_block - 0x14                   // r5
+  push 1, SceSysmem_ldr_r2_r5_14_blx_r3               // pc
+  push 1, SceSysmem_pop_r0_r1_pc                      // pc
   push 2, payload_code_block                          // r0
-  push 1, SceSysmem_pop_r3_pc                         // pc
-  push 1, SceSysmem_pop_r3_pc                         // r3
+  push 0, PAYLOAD_DECOMPRESSED_SIZE                   // r1
   push 1, SceSysmem_ldr_r0_r0_blx_r3                  // pc
+  push 1, SceSysmem_pop_r3_pc                         // pc
   push 0, NULL                                        // r3
   push 1, SceSysmem_blx_r4_pop_r4_pc                  // pc
-  push 9, 0xDEADBEEF                                  // r4
+  push 0, 0xDEADBEEF                                  // r4
 
   // Free temporary block
   push 1, SceSysmem_pop_r0_r1_r2_r3_r4_pc             // pc

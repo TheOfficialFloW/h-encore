@@ -670,11 +670,11 @@ int thread_main(int args, void *argp) {
 
 	ksceCtrlPeekBufferPositive(0, pad, 1);
 	if ((pad[2] & (0x200 | 0x800)) ||
-			!exists("ur0:tai/henkaku.suprx") ||
-			!exists("ur0:tai/henkaku.skprx") ||
-			!exists("ur0:tai/taihen.skprx") ||
-			(!exists("ur0:tai/config.txt") &&
-			!exists("ux0:tai/config.txt"))) {
+		!exists("ur0:tai/henkaku.suprx") ||
+		!exists("ur0:tai/henkaku.skprx") ||
+		!exists("ur0:tai/taihen.skprx") ||
+		(!exists("ur0:tai/config.txt") &&
+		!exists("ux0:tai/config.txt"))) {
 		LOG("Loading bootstrap to system");
 		launch_path = launch_path_ux;
 		ret = fd = ksceIoOpen(launch_path, 0x603, 0x6);

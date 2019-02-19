@@ -403,6 +403,41 @@ int personalize_savedata(int syscall_id) {
   return 0;
 }
 
+int enter_cross = 0;
+uint32_t old_buttons = 0, current_buttons = 0, pressed_buttons = 0;
+
+void read_pad(void) {
+  SceCtrlData pad;
+  sceCtrlPeekBufferPositive(0, &pad, 1);
+
+  old_buttons = current_buttons;
+  current_buttons = pad.buttons;
+  pressed_buttons = current_buttons & ~old_buttons;
+}
+
+int wait_confirm(const char *msg) {
+  printf(msg);
+  printf(" > Press %c to confirm or %c to decline.\n", enter_cross ? 'X' : 'O', enter_cross ? 'O' : 'X');
+
+  while (1) {
+    read_pad();
+
+    if ((enter_cross && pressed_buttons & SCE_CTRL_CROSS) ||
+        (!enter_cross && pressed_buttons & SCE_CTRL_CIRCLE)) {
+      return 1;
+    }
+
+    if ((enter_cross && pressed_buttons & SCE_CTRL_CIRCLE) ||
+        (!enter_cross && pressed_buttons & SCE_CTRL_CROSS)) {
+      return 0;
+    }
+
+    sceKernelDelayThread(10 * 1000);
+  }
+
+  return 0;
+}
+
 void print_result(int res) {
   if (res < 0)
     printf(" > Failed! 0x%08X\n", res);
@@ -435,8 +470,6 @@ void _start() __attribute__ ((weak, alias ("module_start")));
 int module_start(SceSize args, void *argp) {
   SceAppUtilInitParam init_param;
   SceAppUtilBootParam boot_param;
-  SceCtrlData pad;
-  uint32_t old_buttons, current_buttons, pressed_buttons;
   int syscall_id;
   int enter_button;
   int sel;
@@ -454,21 +487,16 @@ int module_start(SceSize args, void *argp) {
   sceAppUtilInit(&init_param, &boot_param);
 
   sceAppUtilSystemParamGetInt(SCE_SYSTEM_PARAM_ID_ENTER_BUTTON, &enter_button);
+  enter_cross = enter_button == SCE_SYSTEM_PARAM_ENTER_BUTTON_CROSS;
 
   psvDebugScreenInit();
   psvDebugScreenClearLineDisable();
 
   sel = 0;
-  old_buttons = 0, current_buttons = 0, pressed_buttons = 0;
-
   print_menu(sel);
 
   while (1) {
-    sceCtrlPeekBufferPositive(0, &pad, 1);
-
-    old_buttons = current_buttons;
-    current_buttons = pad.buttons;
-    pressed_buttons = current_buttons & ~old_buttons;
+    read_pad();
 
     if (pressed_buttons & SCE_CTRL_UP) {
       if (sel > 0)
@@ -488,8 +516,8 @@ int module_start(SceSize args, void *argp) {
       print_menu(sel);
     }
 
-    if ((enter_button == SCE_SYSTEM_PARAM_ENTER_BUTTON_CROSS && pressed_buttons & SCE_CTRL_CROSS) ||
-        (enter_button == SCE_SYSTEM_PARAM_ENTER_BUTTON_CIRCLE && pressed_buttons & SCE_CTRL_CIRCLE)) {
+    if ((enter_cross && pressed_buttons & SCE_CTRL_CROSS) ||
+        (!enter_cross && pressed_buttons & SCE_CTRL_CIRCLE)) {
       psvDebugScreenSetTextColor(AZURE);
 
       if (sel == EXIT) {
@@ -509,9 +537,16 @@ int module_start(SceSize args, void *argp) {
         sceKernelDelayThread(500 * 1000);
         res = personalize_savedata(syscall_id);
       } else if (sel == RESET_TAIHEN_CONFIG) {
-        printf(" > Resetting taiHEN config.txt...\n");
-        sceKernelDelayThread(500 * 1000);
-        res = reset_taihen_config();
+        if (wait_confirm(" > Are you sure you want to reset taiHEN config.txt?\n")) {
+          printf(" > Resetting taiHEN config.txt...\n");
+          sceKernelDelayThread(500 * 1000);
+          res = reset_taihen_config();
+        } else {
+          sel = 0;
+          psvDebugScreenClear();
+          print_menu(sel);
+          continue;
+        }
       }
 
       print_result(res);
@@ -539,7 +574,7 @@ int module_start(SceSize args, void *argp) {
   // Write taiHEN configs if both at ur0: and ux0: don't exist
   if (!exists("ur0:tai/config.txt") &&
       !exists("ux0:tai/config.txt")) {
-    printf(" > Resetting taiHEN config.txt...\n");
+    printf(" > Writing taiHEN config.txt...\n");
     sceKernelDelayThread(500 * 1000);
     res = reset_taihen_config();
     print_result(res);
@@ -561,7 +596,7 @@ int module_start(SceSize args, void *argp) {
 
   if (res < 0 && res != 0x8002D013 && res != 0x8002D017) {
     printf(" > Failed to load HENkaku! 0x%08X\n", res);
-    printf(" > Please relaunch the exploit and reinstall HENkaku.\n");
+    printf(" > Please relaunch the exploit and select 'Install HENkaku'.\n");
     sceKernelDelayThread(5 * 1000 * 1000);
   }
 

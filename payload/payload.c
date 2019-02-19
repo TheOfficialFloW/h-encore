@@ -699,7 +699,7 @@ int thread_main(int args, void *argp) {
 		}
 	} else {
 		ksceAppMgrDestroyOtherAppByPid(app_pid);
-    remove_pkgpatches();
+		remove_pkgpatches();
 		load_taihen();
 		ret = -1;
 	}

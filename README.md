@@ -79,7 +79,8 @@ You can update *h-encore* by following the installation guide above, or followin
 3. Launch VitaShell and navigate to `ux0:user/00/savedata/`.
 4. Press triangle on the folder `PCSG90096` and select `Open decrypted` (you should NOT see the folder `sce_pfs` within this folder when opened decrypted).
 5. Copy the downloaded `system.dat` to `ux0:user/00/savedata/PCSG90096/system.dat`.
-6. Done.
+6. Launch *h-encore* while holding R and select `Install HENkaku` in the bootstrap menu.
+7. Done.
 
 ## FAQ
 

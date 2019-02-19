@@ -47,6 +47,7 @@ enum Items {
   EXIT,
   INSTALL_HENKAKU,
   DOWNLOAD_VITASHELL,
+  PERSONALIZE_SAVEDATA,
   RESET_TAIHEN_CONFIG
 };
 
@@ -54,10 +55,20 @@ const char *items[] = {
   "Exit",
   "Install HENkaku",
   "Download VitaShell",
+  "Personalize savedata",
   "Reset taiHEN config.txt"
 };
 
 #define N_ITEMS (sizeof(items) / sizeof(char *))
+
+int __attribute__((naked, noinline)) call_syscall(int a1, int a2, int a3, int num) {
+  __asm__ (
+    "mov r12, %0 \n"
+    "svc 0 \n"
+    "bx lr \n"
+    : : "r" (num)
+  );
+}
 
 int write_file(const char *file, const void *buf, int size) {
   SceUID fd = sceIoOpen(file, SCE_O_WRONLY | SCE_O_CREAT | SCE_O_TRUNC, 0777);
@@ -368,13 +379,28 @@ int reset_taihen_config() {
   return 0;
 }
 
-int __attribute__((naked, noinline)) call_syscall(int a1, int a2, int a3, int num) {
-  __asm__ (
-    "mov r12, %0 \n"
-    "svc 0 \n"
-    "bx lr \n"
-    : : "r" (num)
-  );
+int personalize_savedata(int syscall_id) {
+  int res;
+  int fd;
+  uint64_t aid;
+
+  res = call_syscall(sceKernelGetProcessId(), 0, 0, syscall_id + 4);
+  if (res < 0 && res != 0x80800003)
+    return res;
+
+  res = sceRegMgrGetKeyBin("/CONFIG/NP", "account_id", &aid, sizeof(uint64_t));
+  if (res < 0)
+    return res;
+
+  fd = sceIoOpen("savedata0:sce_sys/param.sfo", SCE_O_RDWR, 0777);
+  if (fd < 0)
+    return fd;
+
+  sceIoLseek(fd, 0xe4, SCE_SEEK_SET);
+  sceIoWrite(fd, &aid, sizeof(uint64_t));
+  sceIoClose(fd);
+
+  return 0;
 }
 
 void print_result(int res) {
@@ -478,6 +504,10 @@ int module_start(SceSize args, void *argp) {
         printf(" > Downloading VitaShell...\n");
         sceKernelDelayThread(500 * 1000);
         res = download_vitashell();
+      } else if (sel == PERSONALIZE_SAVEDATA) {
+        printf(" > Personalizing savedata...\n");
+        sceKernelDelayThread(500 * 1000);
+        res = personalize_savedata(syscall_id);
       } else if (sel == RESET_TAIHEN_CONFIG) {
         printf(" > Resetting taiHEN config.txt...\n");
         sceKernelDelayThread(500 * 1000);

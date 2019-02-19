@@ -71,6 +71,7 @@ target_link_libraries(bootstrap
   SceAppMgr_stub
   SceAppUtil_stub
   ScePromoterUtil_stub
+  SceRegistryMgr_stub
 )
 
 set_target_properties(bootstrap

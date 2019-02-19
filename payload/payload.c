@@ -256,7 +256,7 @@ static int (*ksceKernelExitDeleteThread)() = 0;
 static int (*ksceKernelGetMemBlockBase)(int uid, void **base) = 0;
 static int (*ksceKernelGetProcessInfo)(int pid, int *data) = 0;
 static int (*ksceKernelGetProcessLocalStorageAddrForPid)(int pid, int key, void **out_addr, int create_if_doesnt_exist) = 0;
-static int (*ksceCtrlPeekBufferPositive)() = 0;
+static int (*ksceCtrlPeekBufferPositive)(int port, void *pad_data, int count) = 0;
 
 // context for the hooks
 static unsigned g_homebrew_decrypt = 0;
@@ -265,6 +265,7 @@ static module_info_t *scenpdrm_info = 0;
 static module_info_t *appmgr_info = 0;
 static u32_t appmgr_code = 0;
 static u32_t appmgr_size = 0;
+static u32_t appmgr_data = 0;
 static u32_t ngs_data = 0;
 
 // save the block id of our own memory
@@ -601,8 +602,40 @@ void cleanup_memory(void) {
 	ksceKernelSetSyscall(syscall_id + 1, syscall_stub);
 	ksceKernelSetSyscall(syscall_id + 2, syscall_stub);
 	ksceKernelSetSyscall(syscall_id + 3, syscall_stub);
+	ksceKernelSetSyscall(syscall_id + 4, syscall_stub);
 	LOG("freeing executable memory");
 	return free_and_exit(g_rx_block, ksceKernelFreeMemBlock, lr);
+}
+
+int mount_savedata(int pid) {
+	char mount_point[16];
+	void *info;
+
+	void *(* sceAppMgrFindProcessInfoByPid)(void *data, int pid);
+	int (* sceAppMgrMountById)(int pid, void *info, int id, const char *titleid, const char *path,
+														 const char *desired_mount_point, const void *klicensee, char *mount_point);
+
+	switch (appmgr_info->module_nid) {
+		case 0x1C9879D6: // 3.65 retail
+			sceAppMgrFindProcessInfoByPid = (void *)(appmgr_code + 0x2DE1);
+			sceAppMgrMountById = (void *)(appmgr_code + 0x19E61);
+			break;
+
+		case 0x54E2E984: // 3.67 retail
+		case 0xC3C538DE: // 3.68 retail
+			sceAppMgrFindProcessInfoByPid = (void *)(appmgr_code + 0x2DE1);
+			sceAppMgrMountById = (void *)(appmgr_code + 0x19E6D);
+			break;
+
+		default:
+			return -1;
+	}
+
+	info = sceAppMgrFindProcessInfoByPid((void *)(appmgr_data + 0x500), pid);
+	if (!info)
+		return -1;
+
+	return sceAppMgrMountById(pid, info + 0x580, 0x3ED, "PCSG90096", "ux0:user/00/savedata/PCSG90096", "savedata0:", NULL, mount_point);
 }
 
 /* Install path and arguments */
@@ -689,6 +722,7 @@ int add_syscalls(void) {
 	ksceKernelSetSyscall(syscall_id + 1, remove_pkgpatches);
 	ksceKernelSetSyscall(syscall_id + 2, remove_sigpatches);
 	ksceKernelSetSyscall(syscall_id + 3, cleanup_memory);
+	ksceKernelSetSyscall(syscall_id + 4, mount_savedata);
 	return 0;
 }
 
@@ -745,6 +779,7 @@ void resolve_imports(unsigned sysmem_base) {
 			DACR_OFF(appmgr_info = find_modinfo((u32_t)info.segments[0].vaddr, "SceAppMgr"));
 			DACR_OFF(appmgr_code = (u32_t)info.segments[0].vaddr);
 			DACR_OFF(appmgr_size = (u32_t)info.segments[0].memsz);
+			DACR_OFF(appmgr_data = (u32_t)info.segments[1].vaddr);
 		}
 		if (strcmp(info.name, "SceIofilemgr") == 0) {
 			iofilemgr_info = find_modinfo((u32_t)info.segments[0].vaddr, "SceIofilemgr");

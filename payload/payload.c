@@ -613,7 +613,7 @@ int mount_savedata(int pid) {
 
 	void *(* sceAppMgrFindProcessInfoByPid)(void *data, int pid);
 	int (* sceAppMgrMountById)(int pid, void *info, int id, const char *titleid, const char *path,
-														 const char *desired_mount_point, const void *klicensee, char *mount_point);
+		const char *desired_mount_point, const void *klicensee, char *mount_point);
 
 	switch (appmgr_info->module_nid) {
 		case 0x1C9879D6: // 3.65 retail

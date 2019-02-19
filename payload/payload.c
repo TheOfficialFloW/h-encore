@@ -697,16 +697,20 @@ int thread_main(int args, void *argp) {
 			ret = ksceAppMgrLaunchAppByPath(launch_path, real_args, sizeof(launch_args), 0, opt, NULL);
 			LOG("ksceAppMgrLaunchAppByPath: %x", ret);
 		}
+		if (ret < 0) {
+			LOG("unable to write bootstrap!");
+			remove_sigpatches();
+			remove_pkgpatches();
+			__asm__ volatile ("mov lr, %0\n"
+												"mov r0, %1\n"
+												"bx r0\n" :: "r" (lr), "r" (cleanup_memory) : "r0", "lr");
+			LOG("should not be here!");
+			while (1);
+		}
 	} else {
 		ksceAppMgrDestroyOtherAppByPid(app_pid);
 		remove_pkgpatches();
 		load_taihen();
-		ret = -1;
-	}
-	if (ret < 0) {
-		LOG("unable to write bootstrap!");
-		remove_sigpatches();
-		remove_pkgpatches();
 		__asm__ volatile ("mov lr, %0\n"
 											"mov r0, %1\n"
 											"bx r0\n" :: "r" (lr), "r" (cleanup_memory) : "r0", "lr");

@@ -836,7 +836,7 @@ void resolve_imports(unsigned sysmem_base) {
 		syscall_stub = (void *)(modulemgr_base + 0x9fc5);
 	);
 	*syscall_lo = syscall_id + 5;
-	// END 3.60-3.68
+	// END 3.65-3.68
 }
 
 void fix_ngs() {
@@ -900,7 +900,7 @@ void __attribute__ ((section (".text.start"))) payload(void *rx_block, uint32_t 
 	int ret;
 	// BEGIN 3.65-3.68
 	void (*debug_print_local)(char *s, ...) = (void*)(sysmem_base + 0x1A155);
-	// END 3.60-3.68
+	// END 3.65-3.68
 
 	DACR_OFF(
 		debug_print = debug_print_local;

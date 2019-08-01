@@ -114,6 +114,7 @@ You can update *h-encore* by following the installation guide above, or followin
 - "Can I switch the PSN account after having *h-encore* installed?" - Yes, since the demo is DRM-free it does not depend on your account.
 - "Are there any risks involved in using *h-encore*?" - No, since it does not modify the OS, but only insert temporary patches into the system.
 - "Can I install it without USB connection?" - You can also connect your PS Vita with your computer using Wi-Fi (there's an option in the Content Manager).
+- "How do I get into bootstrap menu?" - launch h-encore while holding the R trigger.
 
 ## Donation
 

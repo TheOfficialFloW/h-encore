@@ -4,7 +4,7 @@
 
 ## Write-up
 
-A technical explanation of the *h-encore* exploit chain is available [here](WRITE-UP.md).
+A technical explanation of the *h-encore* exploit chain is available [here](https://theofficialflow.github.io/2018/09/11/h-encore.html).
 
 ## Changelog
 

@@ -363,22 +363,22 @@ language_container_t language_polish = {
   L"Błąd podczas montowania partycji ux0, czy karta pamięci jest włożona?",
 };
 
-// by GrayJack & haouingvalt & menelkir
+// by GrayJack & haouingvalt & menelkir & JuniorPassos
 language_container_t language_portuguese_br = {
   L"Configurações do HENkaku",
-  L"Habilitar mimetização da PSN ",
-  L"Habilitar softwares 'homebrew' inseguros",
-  L"Softwares 'homebrew' inseguros podem danificar o seu aparelho permanentemente caso sejam usados ou configurados incorretamente, ou até mesmo maliciosos.\nPor favor, tenha cuidado ao instalá-los.",
-  L"Habilitar mimetização de Versão",
-  L"Versão a mimetizar",
+  L"Habilitar falsificação da PSN",
+  L"Habilitar aplicativos inseguros",
+  L"Aplicativos inseguros podem danificar o seu aparelho permanentemente caso sejam usados ou configurados incorretamente, ou até mesmo maliciosos.\nPor favor, tenha cuidado ao instalá-los.",
+  L"Habilitar falsificação de versão",
+  L"Versão falsificada",
   L"Ação do botão ○",
   L"Entrar",
   L"Cancelar",
-  L"Recarrege o arquivo config.txt do taiHEN",
-  L"taiHEN config.txt foi recarregado com sucesso.",
+  L"Recarregue o arquivo config.txt do taiHEN",
+  L"O arquivo config.txt do taiHEN foi recarregado com sucesso.",
   L"Reiniciar o dispositivo",
-  L"Baixar Conteúdo",
-  L"Desassociar o Cartão de Memória",
+  L"Baixar conteúdo",
+  L"Desassociar o cartão de memória",
   L"ux0:id.dat foi deletado. Agora este cartão de memória pode ser usado em qualquer Vita.",
   L"Falha ao montar ux0. O cartão de memória está inserido?",
 };
